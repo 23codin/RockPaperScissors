@@ -36,28 +36,49 @@ Your score = ${playerScore}
 Opponents score = ${compScore}`
 }
  
-  }
+}
+
    
   const playerSelection = "rock";
   let computerSelection = getComputerChoice();
 
-  function game(){
-    //play a 5 round game using prompt
- 
-   for(let i=0;i<5;i++){
-    let five = prompt("Rock, paper, scissors?", "")
-    alert(playRound(five, computerSelection));
-     computerSelection = getComputerChoice()
-   }
-   if ( playerScore > compScore){
-    alert("Winner!")
-   }
-   else if (compScore > playerScore){
-    alert("Loser!")
-   }
-   else {alert("Tie..")}
-   playerScore = 0;
-   compScore = 0;
+  const buttonGrp = document.querySelector('.buttonGrp')
 
 
+ //Play a 5 round game with button and DOM
+  const result = document.querySelector('.result')
+  let turn = 0
+  function buttonChoice() {
+    result.textContent = playRound(this.className, computerSelection);
+    computerSelection = getComputerChoice();
+    turn+=1;
+    if (turn >= 5){
+        if ( playerScore > compScore){
+            result.textContent = "Winner!"
+           }
+           else if (compScore > playerScore){
+            result.textContent = "Loser!"
+           }
+           else {result.textContent = "Tie.."}
+           playerScore = 0;
+           compScore = 0;
+           turn = 0
+    }
   }
+
+  
+
+  const rockButton = document.querySelector(".rock")
+  rockButton.addEventListener("click", buttonChoice)
+
+  const paperButton = document.querySelector(".paper")
+  paperButton.addEventListener("click", buttonChoice)
+
+  const scissorsButton = document.querySelector('.scissors')
+  scissorsButton.addEventListener('click', buttonChoice)
+
+
+ 
+
+
+ 
